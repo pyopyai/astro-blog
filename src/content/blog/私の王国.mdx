@@ -1,0 +1,34 @@
+---
+title: '私の王国'
+description: ''
+pubDate: '2025-11-24'
+---
+import { Tweet, YouTube } from 'astro-embed';
+
+自分の考えたことをてきとうに書き散らせていける場所はやっぱほしいのね
+
+ひらがなで書いていくような文体（糸井重里ってか任天堂ってか、それとも[ファミレスを享受せよ](https://oissisui.itch.io/moonpalace)ってか、少女終末旅行ってか）的な文体は、やはり軟弱だろうか？（それとも[篠澤広](https://www.youtube.com/watch?v=VJk2etK8I1w)？）
+
+「王国」というと、やはり、なにか大事なもののまわりに垣根をめぐらすイメージがある\
+国という漢字の成り立ちそのものだ\
+王国といえば、というか「ひらがな的文体」の続きでいえば、王国というものに少女性<sup>[未定義]</sup>を感じることはある。\
+筋肉少女帯のアルバム月光蟲のなかの[少女王国の崩壊](https://www.youtube.com/watch?v=M11zBQCQBvo)の印象が強いんだろうか？
+
+youtube埋め込み実装したいが？
+←やってみよう(试试吧)
+
+#### 解説記事など
+
+- [AstroにYouTubeを埋め込む「astro-embed-youtube」の使い方](https://roboin.io/article/2024/04/12/astro-embed-youtube/)\
+*"しかし、AstroでYouTubeの通常の埋め込みコードを使用すると、ページの読み込み速度が低下し、PageSpeed Insightsなどのツールで評価が下がってしまいます。"*\
+ページ読み込みが遅くなるのはまぁ確かに嫌だけれども、これならよくわからんツール入れるほうが嫌かも
+
+- [Astro Embed](https://astro-embed.netlify.app)\
+解説されてたのがコレ。よさそうではある。というか、そもそもiframeとかでyoutube埋め込みしちゃったら静的サイトにならないのでは？ということで**Astro Embed導入決定**
+
+<YouTube id="https://youtu.be//5KdoDP4OtOQ" />
+<Tweet id ="https://twitter.com/PR0GRAMMERHUM0R/status/1991491754525118909" />
+
+![](https://pbs.twimg.com/media/G6MzMhKWUAAdOe7?format=jpg&name=large)
+
+画像はマークダウン手打ちするよりもGyazoからもってくるのがいいか
