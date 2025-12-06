@@ -1,0 +1,86 @@
+---
+title: 'karakeep導入'
+description: ''
+pubDate: '2025-12-06'
+---
+import { Tweet, YouTube } from 'astro-embed';
+
+[![Image from Gyazo](https://i.gyazo.com/87083f9e7f1318c58152ace9ed61c12a.png)](https://gyazo.com/87083f9e7f1318c58152ace9ed61c12a)*karakeepホーム画面*
+
+
+
+なんか色々"開発"してくなり、文章書くなりするときに、充実したブックマークないし興味ある文献を集めておく場所は要るだろう。ただ、2025 年 7 月 8 日をもって [Pocketがサービス終了した](https://support.mozilla.org/ja/kb/Future-of-pocket)この2025/12/06に、ブックマークサービスのデファクトスタンダードはいまだ確立していない…世はまさに「後で読む」戦国時代……（語呂がわるい）
+
+そのなかで、先日miniPCにArchlinuxを入れて何かと便利になったので、  自宅鯖として有効活用したいという欲望もあいまって、セルフホスティング可能なブックマークサービス、karakeepを導入しました
+
+参考: [Pocketサービス終了に伴う「後で読む」環境の移行検討と、Instapaperを選んだ理由](https://zenn.dev/babyjob/articles/3c941e99e61b7c)
+
+### なんでもっと他の有名サービスじゃないの？
+
+1. だいたい課金しなくちゃいけないから or 機能制限があるから
+2. 「セルフホスティング」への憧れ
+3. データは自分でもってたほうがデータにも使い手がでるから(ローカルLLMに喰わせるとか？)
+4. サービス都合でのサ終が怖いから
+
+# karakeepとは？
+
+セルフホスト可能なブックマークサービス(同上)。開発が始まってから精々一年くらいか？
+
+[![Star History Chart](https://api.star-history.com/svg?repos=karakeep-app/karakeep&type=date&legend=top-left)](https://www.star-history.com/#karakeep-app/karakeep&type=date&legend=top-left)
+
+正直、**この開発者の[README.md](https://github.com/karakeep-app/karakeep)がイかす**というか、かなり好感のもてる書きぶりだったのがkarakeepを選んだ決め手でした。
+
+
+> ## Why did I build it?
+>
+> I browse reddit, twitter and hackernews a lot from my phone. I frequently find interesting stuff (articles, tools, etc) that I'd like to bookmark and read later when I'm in front of a laptop. Typical read-it-later apps usecase. Initially, I was using [Pocket](https://getpocket.com/) for that. Then I got into self-hosting and I wanted to self-host this usecase. I used [memos](https://github.com/usememos/memos) for those quick notes and I loved it but it was lacking some features that I found important for that usecase such as link previews and automatic tagging (more on that in the next section).
+>
+> I'm a systems engineer in my day job (and have been for the past 7 years). I didn't want to get too detached from the web development world. I decided to build this app as a way to keep my hand dirty with web development, and at the same time, build something that I care about and use every day.
+
+*Featuresもサイコー*
+
+
+> ## Features
+>
+> - 🔗 Bookmark links, take simple notes and store images and pdfs.
+> - ⬇️ Automatic fetching for link titles, descriptions and images.
+> - 📋 Sort your bookmarks into lists.
+> - 🔎 Full text search of all the content stored.
+> - ✨ AI-based (aka chatgpt) automatic tagging and summarization. With supports for local models using ollama!
+> - 🤖 Rule-based engine for customized management.
+> - 🎆 OCR for extracting text from images.
+> - 🔖 [Chrome plugin](https://chromewebstore.google.com/detail/karakeep/kgcjekpmcjjogibpjebkhaanilehneje) and [Firefox addon](https://addons.mozilla.org/en-US/firefox/addon/karakeep/) for quick bookmarking.
+> - 📱 An [iOS app](https://apps.apple.com/us/app/karakeep-app/id6479258022), and an [Android app](https://play.google.com/store/apps/details?id=app.hoarder.hoardermobile&pcampaignid=web_share).
+> - 📰 Auto hoarding from RSS feeds.
+> - 🔌 REST API and multiple clients.
+> - 🌐 Multi-language support.
+> - 🖍️ Mark and store highlights from your hoarded content.
+> - 🗄️ Full page archival (using [monolith](https://github.com/Y2Z/monolith)) to protect against link rot.
+> - ▶️ Auto video archiving using [yt-dlp](https://github.com/yt-dlp/yt-dlp).
+> - ☑️ Bulk actions support.
+> - 🔐 SSO support.
+> - 🌙 Dark mode support.
+> - 💾 Self-hosting first.
+> - ⬇️ Bookmark importers from Chrome, Pocket, Linkwarden, Omnivore, Tab Session Manager.
+> - 🔄 Automatic sync with browser bookmarks via [floccus](https://floccus.org/).
+> - [Planned] Offline reading on mobile, semantic search across bookmarks, ...
+>
+> **⚠️ This app is under heavy development.**
+
+
+
+# どうやって導入したか
+
+男は黙ってdocker composeですね～（軟派）
+
+https://docs.karakeep.app/installation/docker/
+
+docの通りにしたらすべてうまくいった
+
+他デバイスからのアクセスは[tailscale](https://tailscale.com)VPNです。そもそも自分以外のユーザーはアクセスしないからセキュリティについてはそんなに考えてないです
+
+openAIと繋げば自動でタグ付けや要約してくれたり[![Image from Gyazo](https://i.gyazo.com/bb1c7c9cfb073d6af8396f94d3e0f468.png)](https://gyazo.com/bb1c7c9cfb073d6af8396f94d3e0f468)
+
+オフラインのリーダーとかあるのは便利…なのかもしれないですね[![Image from Gyazo](https://i.gyazo.com/c6d13efba127a9b01f47d5018972af45.png)](https://gyazo.com/c6d13efba127a9b01f47d5018972af45)
+
+chrome/firefoxの拡張機能と、android/iOSのアプリがある
