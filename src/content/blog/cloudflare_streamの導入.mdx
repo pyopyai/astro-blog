@@ -1,0 +1,55 @@
+---
+title: 'Cloudflare Streamの導入'
+description: ''
+pubDate: '2025-12-10'
+---
+import { Tweet, YouTube } from 'astro-embed';
+
+吉田寮食堂で定期的に開催するイベントのひとつに私が運営の中核として動いているものがあり、その様子を動画でサイマル配信したい。
+
+吉田寮食堂（以下、食堂）は[炊事機能を1986年に喪失しており現在は専ら寮生のたまり場兼イベントスペースとして使われており](https://ja.wikipedia.org/wiki/%E5%90%89%E7%94%B0%E5%AF%AE#%E5%AF%AE%E9%A3%9F%E5%A0%82%E3%81%8C%E6%96%87%E5%8C%96%E8%8A%B8%E8%A1%93%E6%8B%A0%E7%82%B9%E3%81%AB)、そこでは大まかにいって隔週のペースでイベントが開かれている。\
+自分が関わっていないイベントも動画で配信してくれたらありがたい。食堂に行くまでもなく、どんなコトが行われているのかわかるし、遠方に住むことになってもそのイベントに参加することができる。
+吉田寮のイベントは原則としてカンパ制（≒無料）だが、お金を払ってもいいから動画配信をみたいという卒寮生や寮外生はけっこういるんじゃないか？\
+かつて、吉田寮内の自治組織のうち食堂を管理する部局の人間に、自前のサイトで動画配信できないだろうか、と軽く尋ねられたこともあった。
+
+吉田寮は自治組織、つまり非営利組織として運営されていることから、商業主義的なことがらには距離を置いてきた。それが商業主義でなくても、自分たちが日々暮らしている住居が観光地的に、またある種ネタ的に消費されることに対する寮生の警戒心は強い。私としても寮がネット民のおもちゃとして消費されることは避けたい。不文律によって守られてきた文化が一見さんによって根こそぎにされるところを私は見すぎるほど見てきた。（常連の馴れ合いによって生まれる淀んだ空気もまた文化を腐らせるけれど）
+
+そのような条件のもとで、食堂の動画配信をいま始めるとすれば、その配信の場は、YoutubeやTwitchといった不特定多数の観客を動員するのに適した巨大プラットフォームよりもむしろ、あまり目立たない、情報の主権を自分で持てるような場が適しているだろう。たとえば、自宅サーバーによるセルフホストか、AWSやcloudflareのようなバックエンド寄りの観客を引っ張ってこないクラウドサービスでホストしてもらうか。
+
+セルフホストについてもいろいろ調べてみて、自宅のminiPCでも動かしてみた。
+[owncast](https://owncast.online)
+なんかは対少人数の身内レベルの配信であれば、なんとか動きそうだったけれど、（不）特定多数の配信で動かすには流石に心もとない。DDNSとかポート開放やそれに係るセキュリティの見直し等がめんどくさくなった部分もあるけれど、どう逆立ちしてもセルフホストである以上、自宅サーバーがボトルネックになってどこかのタイミングで視聴者の増加に耐えられなくなることは明らかだから、動画を自宅サーバーから配信することは諦めた。
+
+ということで、大本命の[Cloudflare Stream](https://www.cloudflare.com/ja-jp/developer-platform/products/cloudflare-stream/)である。価格は月額５ドルから。接続数に関わらず、料金が定額かつ安価、なんというか明朗会計nessに惹かれた。このブログもCF Workersで動かしてドメインもCFでとってるので、管理画面や請求先が増えないのもありがたい。
+[![Image from Gyazo](https://i.gyazo.com/5cf5f07446c3ffb27822907214908b04.png)](https://gyazo.com/5cf5f07446c3ffb27822907214908b04)
+
+CF StreamはOBSでも使えるrtmp形式でコネクション作ってくれるので便利ですね。あとの解説は以下のリンク先に任せます。\
+[Cloudflare Stream ライブ配信機能を試す](https://zenn.dev/kameoncloud/articles/793c2a39d582e3)
+
+配信画面は以下のようになります。なにも配信していないときには「Stream has not started yet.」とか出てるはずです。
+
+## 俺ストリ～ム
+
+<div style="position: relative; padding-top: 56.25%;">
+    <iframe
+        src="https://customer-n2zxxg9wjjwof1qe.cloudflarestream.com/4e9c3f1f529929fb37ff931c59373b4b/iframe"
+        style="border: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%;"
+        allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+        allowfullscreen="true"
+    ></iframe>
+</div>
+
+過去配信は動画として保存されます。
+
+<div style="position: relative; padding-top: 56.25%;">
+  <iframe
+    src="https://customer-n2zxxg9wjjwof1qe.cloudflarestream.com/514141ab3d934ddc871e8905987a26b9/iframe?poster=https%3A%2F%2Fcustomer-n2zxxg9wjjwof1qe.cloudflarestream.com%2F514141ab3d934ddc871e8905987a26b9%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600"
+    loading="lazy"
+    style="border: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%;"
+    allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+    allowfullscreen="true"
+  ></iframe>
+</div>
+
+この動画って、CFのサービス解約したらどうなるんだろう、やっぱり消えるんだろうか？
+そう考えるとyoutube／twitchは優れてますね
