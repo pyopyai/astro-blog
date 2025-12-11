@@ -2,6 +2,7 @@
 title: 'このブログはどういう風に作ったか'
 description: 'このブログはどういう風に作ったか'
 pubDate: '2025-11-19'
+image: 'src\assets\BY-PASS-banner.png'
 ---
 
 Lorem ipsum dolor sit amet, すべてはそこから始まった……
