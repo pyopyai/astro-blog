@@ -2,11 +2,15 @@
 title: 'webhook拡張機能をつくる'
 description: ''
 pubDate: '2026-01-16'
+
 ---
+import { Tweet, YouTube, LinkPreview } from 'astro-embed';
+
+<LinkPreview id="https://github.com/pyopyai/webhook-sender" />
 
 discordの自分専用鯖をメモ＆URLクリップサービスとして使うことにする。ブラウザで開いているサイトを右クリックメニューやショートカットを通じてdiscordにブックマークできれば便利だし、UIをこちらで準備する手間をすっ飛ばして、様々な端末で確認できる。
 
-discordはwebhookからの投稿に対応しているため、開いているサイトのURLを、ブラウザ拡張機能を通じてwebhookURLに送信できれば、条件に叶う。もしdiscordのwebhook機能が終了したとしても、他のwebhookを使えるサービスに移行すればよい。なんにせよ、疎結合はいいことだ。
+discordはwebhookからの投稿に対応しているため、開いているサイトのURLを、ブラウザ拡張機能を通じてwebhookURLに送信できれば、条件に叶う。もしdiscordのwebhook機能が終了したとしても、他のwebhookを使えるサービスに移行すればよい。なんにせよ、疎結合になってるのはいいことだ。
 
 
 
