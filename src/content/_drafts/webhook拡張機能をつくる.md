@@ -1,0 +1,21 @@
+---
+title: 'webhook拡張機能をつくる'
+description: ''
+pubDate: '2026-01-16'
+---
+
+discordの自分専用鯖をメモ＆URLクリップサービスとして使うことにする。ブラウザで開いているサイトを右クリックメニューやショートカットを通じてdiscordにブックマークできれば便利だし、UIをこちらで準備する手間をすっ飛ばして、様々な端末で確認できる。
+
+discordはwebhookからの投稿に対応しているため、開いているサイトのURLを、ブラウザ拡張機能を通じてwebhookURLに送信できれば、条件に叶う。もしdiscordのwebhook機能が終了したとしても、他のwebhookを使えるサービスに移行すればよい。なんにせよ、疎結合はいいことだ。
+
+
+
+[![Image from Gyazo](https://i.gyazo.com/ac52b102a308b6af7b7000074934ad41.gif)](https://gyazo.com/ac52b102a308b6af7b7000074934ad41)
+
+## 参考
+
+[全人類、いますぐ Discord Webhook を使いこなそう](https://zenn.dev/discorders/articles/discord-webhook-guide)
+
+[Intro to Webhooks – Discord](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks)
+
+[Hello World 拡張機能  | Get started  | Chrome for Developers](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world?hl=ja)
