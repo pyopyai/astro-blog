@@ -1,0 +1,30 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import Nav from '../components/Nav.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header>
+			<Nav />
+		</Header>
+		<main>
+			<h1>❤️ Likes</h1>
+			<h2>好きな音楽</h2>
+			<h2>好きなアニメ</h2>
+			<h2>好きなゲーム</h2>
+			<h2>好きな動画</h2>
+
+
+
+
+		<Footer />
+	</body>
+</html>
